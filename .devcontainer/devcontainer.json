@@ -1,0 +1,20 @@
+{
+	"name": "SliDev development container",
+	"dockerComposeFile": [
+		"../docker-compose.yml",
+		"docker-compose.yml"
+	],
+	"service": "dev",
+	"workspaceFolder": "/app",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"antfu.slidev",
+				"redhat.vscode-yaml",
+				"github.vscode-github-actions",
+				"Vue.volar",
+				"antfu.unocss"
+			]
+		}
+	}
+}

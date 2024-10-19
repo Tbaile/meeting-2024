@@ -1,0 +1,10 @@
+services:
+  dev:
+    build:
+      context: .
+      target: development
+    ports:
+      - "3030:3030"
+    volumes:
+      - ".:/app"
+    command: sh -c "npm install && npm run dev"
