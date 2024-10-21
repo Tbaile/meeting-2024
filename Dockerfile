@@ -19,8 +19,10 @@ FROM playwright AS build
 COPY package.json .
 COPY package-lock.json .
 RUN npm ci
-COPY public public
 COPY assets assets
+COPY components components
+COPY layouts layouts
+COPY public public
 COPY slides.md .
 ARG BASE_PATH=/
 RUN npm run build -- --base "${BASE_PATH}" \
