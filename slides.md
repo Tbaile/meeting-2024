@@ -10,13 +10,11 @@ overviewSnapshots: true
 monaco: false
 background: /cover.png
 fonts:
-  serif: Roboto
-  sans: Roboto
+  serif: Poppins
+  sans: Poppins
 ---
 
 # TBA
-
-Un piccolo passo per l'uomo...
 
 ---
 layout: section
