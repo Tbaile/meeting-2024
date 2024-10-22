@@ -84,11 +84,11 @@ layout: statement
 ## Il 90% delle applicazioni di cui abbiamo necessità sono già fruibili attraveso i container.
 
 <div class="flex gap-4 justify-center text-4xl my-3">
-  <v-clicks>
-    <logos-ubuntu />
-    <logos-drupal-icon />
-    <logos-python />
-  </v-clicks>
+  <VClicks>
+    <LogosUbuntu />
+    <LogosDrupalIcon />
+    <LogosPython />
+  </VClicks>
 </div>
 
 <v-click>
@@ -109,22 +109,22 @@ layout: section
 
 Io ho già la mia app...
 
-<v-clicks>
+<VClicks>
 
 Vediamo l'applicazione che vogliamo containerizzare.
 
 Bisogna analizzare la nostra applicazione e capire quali sono le sue necessità:
 
-</v-clicks>
+</VClicks>
 
-<v-clicks>
+<VClicks>
 
 - **Runtime**: quale runtime necessita la nostra applicazione? PHP, Python, Node.js, Java...
 - **Dipendenze**: quali dipendenze necessita la nostra applicazione? Software, librerie, estensioni...
 - **Configurazione**: quali configurazioni necessita la nostra applicazione? Variabili d'ambiente, file di configurazione...
 - **Servizi**: quali servizi necessita la nostra applicazione? Database, cache, mail...
 
-</v-clicks>
+</VClicks>
 
 <!--
 L'applicazione è una applicazione web in PHP (scaffolding iniziale fatto con Laravel), ed è la seguente
@@ -146,15 +146,15 @@ Non sono tutti necessari, tra di loro sono intercambiabili e i container prodott
   <img class="dark:bg-white" src="./assets/nerdctl.svg" />
 </div>
 
-<v-click>
+<VClick>
 
 Nel nostro caso, useremo `podman`, per mantenere una continuità con NethServer 8.
+
+</VClick>
 
 <!--
 Avere un container, non vuol dire essere pronti per NethServer 8, c'è una modulo da sviluppare per poterli avere su NethServer 8
 -->
-
-</v-click>
 
 ---
 layout: section
@@ -168,7 +168,7 @@ layout: section
 
 Andremo step by step, creando un container per l'applicazione che vi ho mostrato prima.
 
-<v-clicks>
+<VClicks>
 
 Nel nostro caso, l'app necessita anche di un database MySQL.
 
@@ -178,7 +178,7 @@ Partiamo da ubuntu, installiamo PHP e MySQL, e creiamo un'applicazione web?
 
 Vediamo cosa sono i registri di container.
 
-</v-clicks>
+</VClicks>
 
 <!--
 Spoiler per MySQL, già stava girando su un container.
@@ -288,7 +288,7 @@ RUN chown -R www-data:www-data /var/www/html/storage \
   && composer install --no-dev
 ```
 
-<v-clicks at="1">
+<VClicks at="1">
 
 `FROM` istruisce il builder di usare l'immagine a seguire come base di partenza.
 
@@ -298,7 +298,7 @@ RUN chown -R www-data:www-data /var/www/html/storage \
 
 `COPY` invece, copia un file o una directory da una sorgente a una destinazione (la sorgente può essere anche un altro container!)
 
-</v-clicks>
+</VClicks>
 
 <!--
 Questo è un file ridotto rispetto a quello che troverete sulla repository del progetto (folder di Apache e setup dell'applicazione)
@@ -360,7 +360,7 @@ podman run --rm --name mysql \
   mysql:8.4
 ```
 
-<v-clicks at="1">
+<VClicks at="1">
 
 Abbiamo delle variabili d'ambiente per configurare il database
 
@@ -370,7 +370,7 @@ Una porta esposta per poter accedere al database
 
 L'immagine che vogliamo eseguire
 
-</v-clicks>
+</VClicks>
 
 <!--
 Se la tua applicazione ha bisogno di un servizio, meglio usare un container già pronto
@@ -399,7 +399,7 @@ DB_PASSWORD=laravel
 ```
 
 <div class="flex justify-center mt-5 text-8xl">
-  <logos-laravel />
+  <LogosLaravel />
 </div>
 
 <!--
@@ -407,7 +407,6 @@ Se metto 127.0.0.1 come host, non funzionerà, perché il container è isolato d
 
 Ho bisogno di un entry che mi permetta di contattare l'host che sta girando il mio container
 -->
-
 
 ---
 
