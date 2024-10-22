@@ -8,7 +8,6 @@ transition: slide-left
 mdc: true
 overviewSnapshots: true
 monaco: false
-background: /cover.png
 fonts:
   serif: Poppins
   sans: Poppins
