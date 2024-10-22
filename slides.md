@@ -28,13 +28,17 @@ layout: section
 
 # Come funzionano i container?
 
-Un container è approssimabile a una macchina virtuale, ma con alcuni punti chiave:
+Un container è approssimabile a una macchina virtuale, ma con alcuni punti chiave
+
+<VClicks>
 
 - Sono solitamente progettati per eseguire un singolo processo
 - Hanno un' immagine di partenza, la quale è la parte statica del container
 - È possibile agganciare dello storage esterno
 - Si possono esporre delle porte per comunicare con l'esterno (port forwarding)
 - È possibile aggiungere variabili d'ambiente
+
+</VClicks>
 
 <!--
 Non sempre girano un solo processo, magari ce ne sono di più, ma è una pratica comune quella di avere un container per "contesto" (es. un container per il database, un container per il web server, un container per l'applicazione)
@@ -64,9 +68,13 @@ Se vogliamo fare il deploy di una applicazione tramite una VM, la dimensione del
 
 Cosa ci spinge a usare tale tecnologia?
 
+<VClicks>
+
 - **Isolamento**: ogni container è isolato dagli altri
 - **Riproducibilità**: un container è riproducibile ovunque
 - **Portabilità**: dato che è uno standard, è possibile eseguirlo ovunque
+
+</VClicks>
 
 <div class="px-25 pt-3">
   <img src="./assets/container_vs_vm.png" />
@@ -84,7 +92,7 @@ Per portabilità si intende che un container può essere eseguito su qualsiasi s
 layout: statement
 ---
 
-## Il 90% delle applicazioni di cui abbiamo necessità sono già fruibili attraveso i container.
+## Più del 90% delle applicazioni di cui abbiamo necessità sono già fruibili attraveso i container.
 
 <div class="flex gap-4 justify-center text-4xl my-3">
   <VClicks>
@@ -110,15 +118,21 @@ layout: section
 
 # Bellissima introduzione, ma come si fa?
 
-Io ho già la mia app...
+Vi presento la mia app...
 
-<VClicks>
+<div class="flex flex-col items-center">
+  <QrCode value="https://github.com/Tbaile/meeting-2024-app" class="w-1/3" :options="{ scale: '20' }" />
 
-Vediamo l'applicazione che vogliamo containerizzare.
+  ## https://github.com/Tbaile/meeting-2024-app
+</div>
+
+---
+
+# Ho il contesto, come faccio?
+
+Andiamo negli step necessari per creare il container
 
 Bisogna analizzare la nostra applicazione e capire quali sono le sue necessità:
-
-</VClicks>
 
 <VClicks>
 
@@ -137,16 +151,22 @@ L'applicazione è una applicazione web in PHP (scaffolding iniziale fatto con La
 
 # Installare il software necessario
 
-Non sono tutti necessari, tra di loro sono intercambiabili e i container prodotti sono al 100% compatibili.
+Non sono tutti necessari, tra di loro sono intercambiabili e i container prodotti sono al 100% compatibili fra loro.
+
+<VClicks>
 
 - Docker
-- <span v-mark.red.underline="{ at: 1 }">Podman</span>
+- <span v-mark.red.underline="{ at: 4 }">Podman</span>
 - NerdCTL
 
+</VClicks>
+
 <div class="grid grid-cols-3 gap-10 mx-10 items-center">
-  <img src="./assets/docker-logo-blue.svg" />
-  <img v-mark.red.circle="{ at: 1 }" src="./assets/podman-logo-full-vert.png" />
-  <img class="dark:bg-white" src="./assets/nerdctl.svg" />
+  <VClicks at="1">
+    <img src="./assets/docker-logo-blue.svg" />
+    <img v-mark.red.circle="{ at: 4 }" src="./assets/podman-logo-full-vert.png" />
+    <img class="dark:bg-white" src="./assets/nerdctl.svg" />
+  </VClicks>
 </div>
 
 <VClick>
@@ -163,23 +183,23 @@ Avere un container, non vuol dire essere pronti per NethServer 8, c'è una modul
 layout: section
 ---
 
-# Ready, set, go!
+# Ready, set... 
 
 ---
 
-# Da dove partiamo?
+# Go!
 
 Andremo step by step, creando un container per l'applicazione che vi ho mostrato prima.
 
 <VClicks>
 
-Nel nostro caso, l'app necessita anche di un database MySQL.
+Nel nostro caso, abbiamo bisogno del runtime di `php` e di `mysql` come database.
 
 Partiamo da ubuntu, installiamo PHP e MySQL, e creiamo un'applicazione web?
 
 ... oppure esiste un container che già fa questo lavoro?
 
-Vediamo cosa sono i registri di container.
+Definiamo cosa sono i registri di container.
 
 </VClicks>
 
@@ -201,7 +221,13 @@ Cosa sono, e come si usano?
 
 Pensate i registri di container come dei repository di pacchetti, ma per i container.
 
+<VClick>
+
 Ne esistono di pubblici e privati, e sono il punto di partenza per la creazione di un container.
+
+</VClick>
+
+<VClick>
 
 Alcuni esempi:
 
@@ -210,6 +236,8 @@ Alcuni esempi:
 - **GitHub Container Registry**: il registro di container di GitHub <mdi-github />
 - **GitLab Container Registry**: il registro di container di GitLab <mdi-gitlab />
 - E molti altri...
+
+</VClick>
 
 <!--
 Far notare che è possible fare mix and match, senza alcun problema.
@@ -223,7 +251,7 @@ Per il nostro esempio, andremo a cercare lo specifico container di `php`.
 
 Accediamo a [Docker Hub](https://hub.docker.com/), e cerchiamo `php`.
 
-<img src="./assets/docker_hub_php.png">
+<img v-click src="./assets/docker_hub_php.png">
 
 ---
 
@@ -242,6 +270,9 @@ podman run --rm -it php:8-apache bash
 - `bash`: il comando da eseguire all'interno del container
 
 <br />
+
+<VClick>
+
 ```bash
 root@container_id:/# php -v
 ```
@@ -251,6 +282,8 @@ PHP 8.3.12 (cli) (built: Oct 17 2024 02:21:29) (NTS)
 Copyright (c) The PHP Group
 Zend Engine v4.3.12, Copyright (c) Zend Technologies
 ```
+
+</VClick>
 
 <!--
 Far vedere la persistenza del container
@@ -269,9 +302,16 @@ Bello `php`, ma mancano le mie cose!
 
 Useremo l'immagine `php` come base, e aggiungeremo il nostro software e le nostre dipendenze
 
+<VClick>
+
 Nella prossima slide introdurremo il concetto di `Dockerfile` o `Containerfile`, che ci permetterà di creare un container personalizzato partendo da un'immagine esistente
 
 Noi oggi scalfiremo giusto la superficie dell'iceberg
+
+</VClick>
+
+
+###### Credits [Pikisuperstar](https://www.freepik.com/pikisuperstar)
 
 ---
 
@@ -319,7 +359,9 @@ Come si esegue il build del container?
 
 Come abbiamo visto, il file di build serve come automazione per la creazione del container, non ci sono operazioni strane da eseguire, rimane tutto come lo faremo mano a mano noi.
 
-A questo punto, possiamo eseguire la build del container.
+A questo punto, possiamo eseguire la build del container:
+
+<VClick>
 
 ```bash
 podman build --tag ghcr.io/tbaile/meeting-2024-app:latest .
@@ -332,7 +374,13 @@ podman build --tag ghcr.io/tbaile/meeting-2024-app:latest .
   - **tag**: la versione dell'immagine `latest`
 - `.`: il percorso di contesto per la build, ovvero la cartella dove mettiamo il progetto
 
+</VClick>
+
+<VClick>
+
 E abbiamo creato il nostro container! <mdi-party-popper />
+
+</VClick>
 
 <!--
 tag serve a differenziare diverse versioni dell'immagine
@@ -415,6 +463,8 @@ Ho bisogno di un entry che mi permetta di contattare l'host che sta girando il m
 
 # Eseguiamo la nostra applicazione
 
+I comandi sono simili a quelli che abbiamo visto prima
+
 ```bash
 podman run --rm \
   --name meeting-2024-app \
@@ -423,7 +473,13 @@ podman run --rm \
   ghcr.io/tbaile/meeting-2024-app:latest
 ```
 
+<VClick>
+
 Una volta che possiamo verificare che l'applicazione funziona, possiamo caricare il container su un registro di container.
+
+</VClick>
+
+<VClick>
 
 ```bash
 podman push ghcr.io/tbaile/meeting-2024-app:latest
@@ -431,10 +487,4 @@ podman push ghcr.io/tbaile/meeting-2024-app:latest
 
 Attenzione, è possible `podman` richieda delle credenziali per poter caricare l'immagine. Questo dipende dal registro di container che si sta utilizzando.
 
----
-layout: end
----
-
-## Credits per le immagini:
-
-- Iceberg illustration: Designed by pikisuperstar / Freepik
+</VClick>
