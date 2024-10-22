@@ -1,6 +1,6 @@
 ---
 theme: default
-title: TBA
+title: Da applicazione a container - Meeting Eroi Digitali 2024
 drawings:
   persist: false
   presenterOnly: true
@@ -13,7 +13,10 @@ fonts:
   sans: Poppins
 ---
 
-# TBA
+# Da applicazione <br /> a container
+
+## Dev Room
+## Meeting Eroi Digitali 2024
 
 ---
 layout: section
