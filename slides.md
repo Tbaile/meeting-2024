@@ -328,7 +328,7 @@ podman build --tag ghcr.io/tbaile/meeting-2024-app:latest .
 - `podman build`: crea un'immagine
 - `--tag`: assegna un tag all'immagine creata, il formato è il seguente:
   - **registro**: dove noi vogliamo pubblicare l'immagine `ghcr.io`
-  - **nome**: il nome dell'immagine `nethesis/meeting-2024-app`
+  - **nome**: il nome dell'immagine `tbaile/meeting-2024-app`
   - **tag**: la versione dell'immagine `latest`
 - `.`: il percorso di contesto per la build, ovvero la cartella dove mettiamo il progetto
 
